@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 import os
 import cv2
+import requests
 
-PHOTO_DIR = os.path.join(os.getcwd(), "photos")
+PHOTO_PATH = os.path.join("/home/tomoyuki/.node-red/public/images/camera.jpg")
+URL = "http://localhost:1880/red/camera"
 
  # /dev/video0
 VIDEO = cv2.VideoCapture(0)
-FPS = VIDEO.get(cv2.CAP_PROP_FPS)
+FPS = VIDEO.get(cv2.CAP_PROP_FPS) # 1 request per 1 sec.
 timestamp = 0
 adjust_fps = 0
 
@@ -21,8 +23,9 @@ while(True):
 
     # Save 1 frame per 1 second
     if adjust_fps % FPS == 0:
-        path = os.path.join(PHOTO_DIR, "photo{0:05d}.jpg".format(timestamp))
-        cv2.imwrite(path, frame)
+        cv2.imwrite(PHOTO_PATH, frame)
+        files = {'upload_file': open(PHOTO_PATH, "rb")}
+        res = requests.post(URL, files=files)
         timestamp += 1
 
     adjust_fps += 1
