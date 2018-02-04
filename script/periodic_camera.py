@@ -3,7 +3,7 @@ import os
 import cv2
 import requests
 
-PHOTO_PATH = os.path.join("/home/tomoyuki/.node-red/public/images/camera.jpg")
+PHOTO_PATH = os.path.join("~/.node-red/public/images/camera.jpg")
 URL = "http://localhost:1880/red/camera"
 
  # /dev/video0
@@ -14,7 +14,7 @@ adjust_fps = 0
 
 while(True):
     ret, frame = VIDEO.read()
-    cv2.imshow('frame', frame) # Show for debug
+#    cv2.imshow('frame', frame) # Show for debug
 
     # Exit if "q" pressed
     key = cv2.waitKey(1) & 0xFF
