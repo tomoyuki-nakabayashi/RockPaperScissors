@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<img src="images/camera.jpg" name="camera"><br>（<span id="update"></span>update)
+<img src="images/camera.jpg" name="camera"><br>（<span id="camera_update"></span>update)
 <script type="text/javascript">
 cam = new Image();
 cam.src = document.camera.src;
@@ -14,8 +14,22 @@ cameraTimer();
 function cameraTimer() {
 	var now = new Date();
 	document.camera.src = cam.src + "?" + now.getTime();
-	document.getElementById("update").innerHTML = now.getHours() + "時" + now.getMinutes() + "分";
+	document.getElementById("camera_update").innerHTML = now.getHours() + "時" + now.getMinutes() + "分";
 	setTimeout("cameraTimer()",1000);
+}
+</script>
+
+<img src="images/result.png" name="result"><br>（<span id="update"></span>update)
+<script type="text/javascript">
+res = new Image();
+res.src = document.result.src;
+resultTimer();
+
+function resultTimer() {
+        var now = new Date();
+        document.result.src = res.src + "?" + now.getTime();
+        document.getElementById("update").innerHTML = now.getHours() + "時" + now.getMinutes() + "分";
+        setTimeout("resultTimer()",1000);
 }
 </script>
 
